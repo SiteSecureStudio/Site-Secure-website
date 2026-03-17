@@ -304,31 +304,144 @@
     }
     .ph-icon svg { display: block; }
 
-    .plan-cta {
+    /* ── ANIMATED CTA BUTTON ── */
+    .ui-anim-btn {
+      --highlight-hue: 210deg;
+      --highlight:    hsl(var(--highlight-hue), 100%, 70%);
+      --highlight-80: hsla(var(--highlight-hue), 100%, 70%, 0.8);
+      --highlight-50: hsla(var(--highlight-hue), 100%, 70%, 0.5);
+      --highlight-30: hsla(var(--highlight-hue), 100%, 70%, 0.3);
+      --highlight-20: hsla(var(--highlight-hue), 100%, 70%, 0.2);
+      --padding: 4px;
+      --radius: 24px;
+      --transition: 0.4s;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+      border-radius: var(--radius);
+      padding: 12px 20px;
       width: 100%;
-      padding: 12px;
-      border-radius: 10px;
+      background: #030a1c;
+      color: #fff;
+      border: 1px solid rgba(13,37,80,0.5);
       font-family: 'Space Grotesk', sans-serif;
       font-size: 0.9375rem;
       font-weight: 700;
-      cursor: pointer;
-      transition: opacity 0.15s, transform 0.15s, box-shadow 0.15s;
-      border: none;
+      white-space: nowrap;
+      box-shadow:
+        inset 0px 1px 1px rgba(255,255,255,0.2),
+        inset 0px 2px 2px rgba(255,255,255,0.15),
+        inset 0px 4px 4px rgba(255,255,255,0.1),
+        inset 0px 8px 8px rgba(255,255,255,0.05),
+        inset 0px 16px 16px rgba(255,255,255,0.05),
+        0 1px 1px rgba(0,0,0,0.02),
+        0 2px 2px rgba(0,0,0,0.03),
+        0 4px 4px rgba(0,0,0,0.05),
+        0 8px 8px rgba(0,0,0,0.06),
+        0 16px 16px rgba(0,0,0,0.08),
+        0 1px 2px rgba(0,0,0,0.1);
+      transition: box-shadow var(--transition), border-color var(--transition), background-color var(--transition);
     }
-    .plan-cta:hover { opacity: 0.9; transform: translateY(-1px); }
-    .plan-cta:active { transform: translateY(0); }
-    .plan-cta.outline {
-      background: transparent;
-      border: 1px solid var(--border-hi);
-      color: var(--text);
+    .ui-anim-btn::before {
+      content: '';
+      position: absolute;
+      top: calc(0px - var(--padding));
+      left: calc(0px - var(--padding));
+      width: calc(100% + var(--padding) * 2);
+      height: calc(100% + var(--padding) * 2);
+      border-radius: calc(var(--radius) + var(--padding));
+      pointer-events: none;
+      background-image: linear-gradient(0deg, #0004, #000a);
+      z-index: -1;
+      transition: box-shadow var(--transition);
+      box-shadow:
+        0 -8px 8px -6px #0000 inset,
+        0 -16px 16px -8px #00000000 inset,
+        1px 1px 1px #fff2,
+        2px 2px 2px #fff1,
+        -1px -1px 1px #0002,
+        -2px -2px 2px #0001;
     }
-    .plan-cta.outline:hover { border-color: var(--primary); color: var(--primary-l); }
-    .plan-cta.solid {
-      background: linear-gradient(90deg, var(--primary), #1a7cf5);
-      color: #fff;
-      box-shadow: 0 4px 18px rgba(16,103,221,0.4);
+    .ui-anim-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background-image: linear-gradient(0deg, #fff, var(--highlight), var(--highlight-50) 8%, transparent);
+      opacity: 0;
+      transition: opacity var(--transition), filter var(--transition);
     }
-    .plan-cta.solid:hover { box-shadow: 0 6px 24px rgba(16,103,221,0.55); }
+    .ui-anim-btn-svg {
+      width: 20px; height: 20px;
+      fill: #19E6FD;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 3px rgba(25,230,253,0.5));
+      transform: rotate(60deg);
+      transition: fill var(--transition), filter var(--transition);
+    }
+    @keyframes ui-rocket-launch {
+      0%   { transform: rotate(60deg) translate(0,     0)    scale(1);   opacity: 1; }
+      100% { transform: rotate(60deg) translate(0,   -24px)  scale(0.7); opacity: 0; }
+    }
+    @keyframes ui-rocket-return {
+      0%   { transform: rotate(60deg) translate(0,    14px)  scale(0.7); opacity: 0; }
+      65%  { transform: rotate(60deg) translate(0,    -3px)  scale(1.1); opacity: 1; }
+      100% { transform: rotate(60deg) translate(0,     0)    scale(1);   opacity: 1; }
+    }
+    .ui-anim-btn-svg.launching { animation: ui-rocket-launch 0.35s cubic-bezier(0.4,0,0.6,1) forwards; }
+    .ui-anim-btn-svg.returning { animation: ui-rocket-return  0.45s cubic-bezier(0.2,0,0.2,1) forwards; }
+    .ui-anim-txt-wrapper { position: relative; display: inline-flex; align-items: center; }
+    .ui-anim-txt-1 { display: inline-flex; }
+    .ui-anim-letter {
+      display: inline-block;
+      color: #19E6FD;
+      animation: ui-letter-anim 2s ease-in-out infinite;
+      transition: color var(--transition), text-shadow var(--transition);
+    }
+    @keyframes ui-letter-anim {
+      50% { text-shadow: 0 0 6px rgba(25,230,253,0.7); color: #fff; }
+    }
+    .ui-anim-btn:hover { border-color: hsla(var(--highlight-hue), 100%, 80%, 0.4); }
+    .ui-anim-btn:hover::before {
+      box-shadow:
+        0 -8px 8px -6px #fffa inset,
+        0 -16px 16px -8px var(--highlight-30) inset,
+        1px 1px 1px #fff2, 2px 2px 2px #fff1,
+        -1px -1px 1px #0002, -2px -2px 2px #0001;
+    }
+    .ui-anim-btn:hover::after {
+      opacity: 1;
+      -webkit-mask-image: linear-gradient(0deg, #fff, transparent);
+      mask-image: linear-gradient(0deg, #fff, transparent);
+    }
+    .ui-anim-btn:hover .ui-anim-btn-svg {
+      fill: #fff;
+      filter: drop-shadow(0 0 5px rgba(25,230,253,0.9)) drop-shadow(0 -2px 8px rgba(25,230,253,0.5));
+    }
+    .ui-anim-btn:hover .ui-anim-letter { color: #fff; text-shadow: 0 0 3px #fff8; }
+    .ui-anim-btn:active {
+      border-color: hsla(var(--highlight-hue), 100%, 80%, 0.7);
+      background-color: hsla(var(--highlight-hue), 50%, 20%, 0.5);
+    }
+    .ui-anim-btn:active::before {
+      box-shadow:
+        0 -8px 12px -6px #fffa inset,
+        0 -16px 16px -8px var(--highlight-80) inset,
+        1px 1px 1px #fff4, 2px 2px 2px #fff2,
+        -1px -1px 1px #0002, -2px -2px 2px #0001;
+    }
+    .ui-anim-btn:active::after {
+      opacity: 1;
+      -webkit-mask-image: linear-gradient(0deg, #fff, transparent);
+      mask-image: linear-gradient(0deg, #fff, transparent);
+      filter: brightness(200%);
+    }
+    .ui-anim-btn:active .ui-anim-letter { text-shadow: 0 0 1px hsla(var(--highlight-hue), 100%, 90%, 0.9); animation: none; }
 
     /* ── COMPARISON TABLE ── */
     .compare-wrap {
@@ -1131,6 +1244,38 @@
 </footer>
 
 <script>
+  // Animated Get Started buttons
+  const rocketSvg = `<svg class="ui-anim-btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C9.5 5.5 8.5 9.5 8.5 13.5H15.5C15.5 9.5 14.5 5.5 12 2Z"/><circle cx="12" cy="9.5" r="1.6" fill="rgba(1,3,10,0.7)"/><path d="M8.5 13.5L5.5 18H9.5Z"/><path d="M15.5 13.5L18.5 18H14.5Z"/><path d="M10.5 18Q12 22 13.5 18" fill="none" stroke="#19E6FD" stroke-width="1.6" stroke-linecap="round"/></svg>`;
+
+  function makeAnimBtn(label, hue) {
+    const letters = Array.from(label).map((ch, i) =>
+      `<span class="ui-anim-letter" style="animation-delay:${(i * 0.08).toFixed(2)}s">${ch === ' ' ? '&nbsp;' : ch}</span>`
+    ).join('');
+    return `<button class="ui-anim-btn" style="--highlight-hue:${hue}deg"><div class="ui-anim-txt-wrapper"><div class="ui-anim-txt-1">${letters}</div></div>${rocketSvg}</button>`;
+  }
+
+  document.querySelectorAll('.plan-cta').forEach(btn => {
+    const label = btn.textContent.replace('→', '').trim();
+    const isFeatured = btn.classList.contains('solid');
+    const wrap = document.createElement('div');
+    wrap.innerHTML = makeAnimBtn(label, isFeatured ? 190 : 210);
+    btn.replaceWith(wrap.firstChild);
+  });
+
+  document.querySelectorAll('.ui-anim-btn').forEach(btn => {
+    const svg = btn.querySelector('.ui-anim-btn-svg');
+    btn.addEventListener('mouseenter', () => {
+      svg.classList.remove('returning');
+      void svg.offsetWidth;
+      svg.classList.add('launching');
+    });
+    btn.addEventListener('mouseleave', () => {
+      svg.classList.remove('launching');
+      void svg.offsetWidth;
+      svg.classList.add('returning');
+    });
+  });
+
   // BG paths (same as main site)
   (function() {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
