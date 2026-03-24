@@ -794,7 +794,7 @@
 <!-- BANNER -->
 <div class="banner">
   <strong>New:</strong> Security audits now available for existing sites.
-  <a href="#">Learn more →</a>
+  <a href="security.html">Learn more →</a>
 </div>
 
 <!-- NAV -->
@@ -805,14 +805,13 @@
   </a>
   <div class="nav-center">
     <a href="services.html">Services</a>
-    <a href="index.html#security">Security</a>
-    <a href="index.html#process">Process</a>
-    <a href="index.html#work">Work</a>
+    <a href="security.html">Security</a>
+    <a href="process.html">Process</a>
     <a href="pricing.html" class="active">Pricing</a>
+    <a href="contact.html">Contact</a>
   </div>
   <div class="nav-right">
-    <button class="btn-ghost">Sign in</button>
-    <button class="btn-nav">Get started</button>
+    <a href="https://wa.me/60179742459" target="_blank" rel="noopener"><button class="btn-nav">Get started</button></a>
   </div>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -822,14 +821,13 @@
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-menu">
   <a href="services.html">Services</a>
-  <a href="index.html#security">Security</a>
-  <a href="index.html#process">Process</a>
-  <a href="index.html#work">Work</a>
+  <a href="security.html">Security</a>
+  <a href="process.html">Process</a>
   <a href="pricing.html" class="active">Pricing</a>
+  <a href="contact.html">Contact</a>
   <div class="mobile-menu-divider"></div>
   <div class="mobile-menu-btns">
-    <button class="m-ghost">Sign in</button>
-    <button class="m-primary">Get started</button>
+    <a href="https://wa.me/60179742459" target="_blank" rel="noopener" style="flex:1"><button class="m-primary" style="width:100%">Get started</button></a>
   </div>
 </div>
 
@@ -875,7 +873,6 @@
         2 revisions · 14-day support
       </div>
     </div>
-    <button class="plan-cta outline">Get started →</button>
   </div>
 
   <!-- BUSINESS -->
@@ -910,7 +907,6 @@
         3 revisions · 30-day support
       </div>
     </div>
-    <button class="plan-cta outline">Get started →</button>
   </div>
 
   <!-- PROFESSIONAL -->
@@ -946,7 +942,6 @@
         4 revisions · 60-day support
       </div>
     </div>
-    <button class="plan-cta solid">Get started →</button>
   </div>
 
   <!-- E-COMMERCE -->
@@ -981,8 +976,16 @@
         4 revisions · 60-day support
       </div>
     </div>
-    <button class="plan-cta outline">Get started →</button>
   </div>
+</div>
+
+<!-- SINGLE CTA -->
+<div style="display:flex; flex-direction:column; align-items:center; padding: 0 24px 72px; gap:14px;">
+  <a href="contact.html" id="pricing-cta-btn" style="text-decoration:none; display:inline-flex; width:fit-content; margin:0 auto;">
+    <div class="ui-anim-txt-wrapper"><div class="ui-anim-txt-1"></div></div>
+    <svg class="ui-anim-btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C9.5 5.5 8.5 9.5 8.5 13.5H15.5C15.5 9.5 14.5 5.5 12 2Z"/><circle cx="12" cy="9.5" r="1.6" fill="rgba(1,3,10,0.7)"/><path d="M8.5 13.5L5.5 18H9.5Z"/><path d="M15.5 13.5L18.5 18H14.5Z"/><path d="M10.5 18Q12 22 13.5 18" fill="none" stroke="#19E6FD" stroke-width="1.6" stroke-linecap="round"/></svg>
+  </a>
+  <p style="font-size:0.82rem; color:var(--text-subtle);">Not sure which plan? We'll help you figure it out on the call.</p>
 </div>
 
 <!-- COMPARISON TABLE -->
@@ -1224,16 +1227,6 @@
   </div><!-- /table-scroll -->
 </div><!-- /compare-wrap -->
 
-<!-- CTA -->
-<section class="cta-section reveal">
-  <h2>Not sure which plan fits?</h2>
-  <p>Let's have a quick chat. We'll recommend the right package based on your goals and budget.</p>
-  <div class="cta-btns">
-    <button class="btn-primary">Book a free consultation</button>
-    <button class="btn-secondary">WhatsApp us →</button>
-  </div>
-</section>
-
 <!-- FOOTER -->
 <footer>
   <a href="index.html" class="footer-logo">
@@ -1254,13 +1247,25 @@
     return `<button class="ui-anim-btn" style="--highlight-hue:${hue}deg"><div class="ui-anim-txt-wrapper"><div class="ui-anim-txt-1">${letters}</div></div>${rocketSvg}</button>`;
   }
 
-  document.querySelectorAll('.plan-cta').forEach(btn => {
-    const label = btn.textContent.replace('→', '').trim();
-    const isFeatured = btn.classList.contains('solid');
-    const wrap = document.createElement('div');
-    wrap.innerHTML = makeAnimBtn(label, isFeatured ? 190 : 210);
-    btn.replaceWith(wrap.firstChild);
-  });
+  // Single pricing CTA button
+  (function() {
+    const btn = document.getElementById('pricing-cta-btn');
+    if (!btn) return;
+    btn.classList.add('ui-anim-btn');
+    btn.style.setProperty('--highlight-hue', '210deg');
+    const txtWrap = btn.querySelector('.ui-anim-txt-1');
+    const label = 'Get started';
+    txtWrap.innerHTML = Array.from(label).map((ch, i) =>
+      `<span class="ui-anim-letter" style="animation-delay:${(i*0.08).toFixed(2)}s">${ch === ' ' ? '&nbsp;' : ch}</span>`
+    ).join('');
+    const svg = btn.querySelector('.ui-anim-btn-svg');
+    btn.addEventListener('mouseenter', () => {
+      svg.classList.remove('returning'); void svg.offsetWidth; svg.classList.add('launching');
+    });
+    btn.addEventListener('mouseleave', () => {
+      svg.classList.remove('launching'); void svg.offsetWidth; svg.classList.add('returning');
+    });
+  })();
 
   document.querySelectorAll('.ui-anim-btn').forEach(btn => {
     const svg = btn.querySelector('.ui-anim-btn-svg');

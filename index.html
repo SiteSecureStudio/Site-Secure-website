@@ -592,6 +592,18 @@
       height: 1px;
       background: linear-gradient(90deg, transparent, rgba(25,230,253,0.22), transparent);
     }
+    .plat-card .card-glow {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(16,103,221,0.18) 0%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .plat-card:hover .card-glow { opacity: 1; }
     .plat-icon {
       width: 42px; height: 42px;
       border-radius: 11px;
@@ -1051,7 +1063,7 @@
 <!-- BANNER -->
 <div class="banner">
   <strong>New:</strong> Security audits now available for existing sites.
-  <a href="#">Learn more →</a>
+  <a href="security.html">Learn more →</a>
 </div>
 
 <!-- NAV -->
@@ -1062,14 +1074,13 @@
   </a>
   <div class="nav-center">
     <a href="services.html">Services</a>
-    <a href="#security">Security</a>
-    <a href="#process">Process</a>
-    <a href="#work">Work</a>
+    <a href="security.html">Security</a>
+    <a href="process.html">Process</a>
     <a href="pricing.html">Pricing</a>
+    <a href="contact.html">Contact</a>
   </div>
   <div class="nav-right">
-    <button class="btn-ghost">Sign in</button>
-    <button class="btn-nav">Get started</button>
+    <a href="https://wa.me/60179742459" target="_blank" rel="noopener"><button class="btn-nav">Get started</button></a>
   </div>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -1079,14 +1090,13 @@
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-menu">
   <a href="services.html">Services</a>
-  <a href="#security">Security</a>
-  <a href="#process">Process</a>
-  <a href="#work">Work</a>
+  <a href="security.html">Security</a>
+  <a href="process.html">Process</a>
   <a href="pricing.html">Pricing</a>
+  <a href="contact.html">Contact</a>
   <div class="mobile-menu-divider"></div>
   <div class="mobile-menu-btns">
-    <button class="m-ghost">Sign in</button>
-    <button class="m-primary">Get started</button>
+    <a href="https://wa.me/60179742459" target="_blank" rel="noopener" style="flex:1"><button class="m-primary" style="width:100%">Get started</button></a>
   </div>
 </div>
 
@@ -1098,11 +1108,14 @@
     <!-- Left -->
     <div>
       <div class="hero-pill"><span class="hero-pill-dot"></span>Now accepting new clients</div>
-      <h1 class="hero-h1">Flexible <em>Web Security</em> Without Compromise</h1>
+      <h1 class="hero-h1" style="display:flex; flex-direction:column; gap:0.05em;">
+        <span>We Build It</span>
+        <span>We Automate It</span>
+        <span><em>We Secure It</em></span>
+      </h1>
       <p class="hero-sub">Beautiful, fast websites with enterprise-grade security built in. SiteSecure handles design, development, and protection — under one roof.</p>
       <div class="hero-btns">
-        <button class="btn-primary">Start building free</button>
-        <button class="btn-secondary">View our work →</button>
+        <a href="https://wa.me/60179742459" target="_blank" rel="noopener"><button class="btn-primary">Start Building</button></a>
       </div>
     </div>
     <!-- Right card -->
@@ -1262,19 +1275,6 @@
   </div>
 </div>
 
-<!-- LOGO STRIP -->
-<div class="logo-strip">
-  <p class="logo-strip-label">Trusted by businesses across industries</p>
-  <div class="logo-strip-row">
-    <span class="logo-word">Shopify</span>
-    <span class="logo-word">Stripe</span>
-    <span class="logo-word">Vercel</span>
-    <span class="logo-word">Linear</span>
-    <span class="logo-word">Notion</span>
-    <span class="logo-word">Figma</span>
-    <span class="logo-word">Loom</span>
-  </div>
-</div>
 
 <!-- FEATURE 1: Design + Performance -->
 <div class="section">
@@ -1412,7 +1412,7 @@
     <div>
       <div class="sec-label">Development</div>
       <h2 class="feat-h2">Powered by modern, developer&#8209;friendly tools and stacks</h2>
-      <p class="feat-body">Clean, maintainable code using the right tool for the job — React, Next.js, Webflow, or hand-crafted HTML/CSS. You own everything we build.</p>
+      <p class="feat-body">Clean, maintainable code using the right tool for the job — React, Next.js, Webflow, or hand-crafted HTML/CSS.</p>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;">
         <span style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:7px;padding:5px 13px;font-size:0.8125rem;color:var(--text-muted);">React</span>
         <span style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:7px;padding:5px 13px;font-size:0.8125rem;color:var(--text-muted);">Next.js</span>
@@ -1463,6 +1463,7 @@
   </div>
   <div class="plat-grid">
     <div class="plat-card reveal">
+      <div class="card-glow"></div>
       <div class="plat-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#19E6FD" stroke-width="1.75"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
       </div>
@@ -1470,13 +1471,15 @@
       <p>Conversion-focused designs built to reflect your brand and drive real results.</p>
     </div>
     <div class="plat-card reveal reveal-delay-1">
+      <div class="card-glow"></div>
       <div class="plat-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#19E6FD" stroke-width="1.75"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
       </div>
       <h3>Development</h3>
-      <p>Clean, maintainable code using modern frameworks. You own every line.</p>
+      <p>Clean, maintainable code using modern frameworks.</p>
     </div>
     <div class="plat-card reveal reveal-delay-2">
+      <div class="card-glow"></div>
       <div class="plat-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#19E6FD" stroke-width="1.75"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       </div>
@@ -1484,6 +1487,7 @@
       <p>SSL, WAF, DDoS protection, and real-time monitoring on every project.</p>
     </div>
     <div class="plat-card reveal">
+      <div class="card-glow"></div>
       <div class="plat-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#19E6FD" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       </div>
@@ -1491,6 +1495,7 @@
       <p>Global infrastructure with 99.9% uptime SLA and sub-second load times.</p>
     </div>
     <div class="plat-card reveal reveal-delay-1">
+      <div class="card-glow"></div>
       <div class="plat-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#19E6FD" stroke-width="1.75"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
       </div>
@@ -1498,6 +1503,7 @@
       <p>Privacy-first dashboards with real-time data. No cookies, no compliance headaches.</p>
     </div>
     <div class="plat-card reveal reveal-delay-2">
+      <div class="card-glow"></div>
       <div class="plat-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#19E6FD" stroke-width="1.75"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       </div>
@@ -1515,7 +1521,7 @@
   <p>Real results from real clients. No vanity metrics.</p>
   <div class="trust-grid">
     <div class="trust-card">
-      <div class="trust-stat"><span>150+</span></div>
+      <div class="trust-stat"><span>100+</span></div>
       <p>Websites launched across design, development, and security projects</p>
     </div>
     <div class="trust-card">
@@ -1538,10 +1544,9 @@
   <div class="cta-glow"></div>
   <div class="sec-label" style="justify-content:center;">Get started</div>
   <h2>Enhance your online presence and grow your business</h2>
-  <p>Join 150+ businesses that trust SiteSecure to build, secure, and grow their web presence.</p>
+  <p>Join 100+ businesses that trust SiteSecure to build, secure, and grow their web presence.</p>
   <div class="cta-btns">
-    <button class="btn-primary">Start your project</button>
-    <button class="btn-secondary">Book a free call</button>
+    <a href="https://wa.me/60179742459" target="_blank" rel="noopener"><button class="btn-primary">Start Building</button></a>
   </div>
 </div>
 
@@ -1556,30 +1561,22 @@
       <p>Web design, development, and security — delivered as a complete package for businesses that care about quality.</p>
     </div>
     <div class="footer-col">
-      <h4>Services</h4>
-      <a href="#">Web Design</a>
-      <a href="#">Development</a>
-      <a href="#">Security</a>
-      <a href="#">Hosting</a>
+      <h4>Pages</h4>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="process.html">Process</a>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
-      <a href="#">About</a>
-      <a href="#">Work</a>
-      <a href="#">Blog</a>
-      <a href="#">Contact</a>
-    </div>
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms of Service</a>
-      <a href="#">Security</a>
-      <a href="#">Cookie Policy</a>
+      <a href="security.html">Security</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="https://wa.me/60179742459" target="_blank" rel="noopener">WhatsApp Us</a>
     </div>
   </div>
   <div class="footer-bottom">
     <span>© 2026 SiteSecure. All rights reserved.</span>
-    <span>Built with care in Auckland, NZ</span>
+    <span>Built with care in Kuala Lumpur, MY</span>
   </div>
 </footer>
 
@@ -1725,6 +1722,16 @@
 
   window.addEventListener('scroll', tickScrollAnim, { passive: true });
   tickScrollAnim();
+
+  // Cursor glow on platform cards
+  document.querySelectorAll('.plat-card').forEach(card => {
+    const glow = card.querySelector('.card-glow');
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      glow.style.left = (e.clientX - rect.left) + 'px';
+      glow.style.top  = (e.clientY - rect.top)  + 'px';
+    });
+  });
 </script>
 </body>
 </html>
